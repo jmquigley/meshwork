@@ -1,0 +1,69 @@
+{
+    "name": "meshwork",
+    "version": "0.0.1",
+    "author": "jmquigley <jmquigley@outlook.com>",
+    "description": "Multi-module package.json manager",
+    "private": false,
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jmquigley/meshwork"
+    },
+    "bugs": {
+        "url": "https://github.com/jmquigley/meshwork/issues"
+    },
+    "engines": {
+        "node": ">=6.5"
+    },
+    "dependencies": {
+        "package-merge": "^0.1.2",
+        "yargs": "^6.5.0"
+    },
+    "devDependencies": {
+        "ava": "^0.17.0",
+        "xo": "^0.17.1"
+    },
+    "main": "index.js",
+    "bin": {
+        "meshwork": "./cli.js"
+    },
+    "scripts": {
+        "test": "xo && ava"
+    },
+    "xo": {
+        "space": 4,
+        "env": {
+            "browser": true,
+            "node": true,
+            "es6": true
+        },
+        "global": [
+            "window",
+            "describe",
+            "it",
+            "JSON"
+        ],
+        "rules": {
+            "import/no-unresolved": "off",
+            "no-unused-vars": "off",
+            "space-before-function-paren": "off",
+            "no-multiple-empty-lines": [
+                "error",
+                {
+                    "max": 2,
+                    "maxEOF": 1
+                }
+            ],
+            "unicorn/filename-case": [
+                "error",
+                {
+                    "case": "snakeCase"
+                }
+            ],
+            "arrow-parens": [
+                "error",
+                "always"
+            ]
+        }
+    }
+}
