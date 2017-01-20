@@ -19,15 +19,6 @@ let tobj2 = {
     item2: 'item2'
 };
 
-let config = {
-    base: `${unitTestDir}/package.json`,
-    modules: [
-        `${unitTestDir}/module1/package.json`,
-        `${unitTestDir}/module2/package.json`
-    ],
-    verbose: false
-};
-
 
 test.before(t => {
     if (fs.existsSync(unitTestDir)) {
@@ -155,7 +146,14 @@ test('Validating missing module configuration', t => {
 
 
 test('Validating merge process', t => {
-    meshwork(config);
+    meshwork({
+        base: `${unitTestDir}/package.json`,
+        modules: [
+            `${unitTestDir}/module1/package.json`,
+            `${unitTestDir}/module2/package.json`
+        ],
+        verbose: false
+    });
 
     let s = '{"common":"common stuff"}';
     let buf = fs.readFileSync(fbase).toString();
