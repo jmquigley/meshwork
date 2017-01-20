@@ -17,11 +17,7 @@ function merge(base, module, opts) {
     let src = fs.readFileSync(base);
     let combined = packageMerge(dst, src);
 
-    fs.writeFileSync(module, combined, err => {
-        if (err) {
-            throw err;
-        }
-    });
+    fs.writeFileSync(module, combined);
 }
 
 module.exports = function(opts = undefined, configFile = 'meshwork.json') {
