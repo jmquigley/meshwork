@@ -1,6 +1,6 @@
 {
   "name": "meshwork",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "jmquigley <jmquigley@outlook.com>",
   "description": "Multi-module package.json manager",
   "private": false,
@@ -47,6 +47,7 @@
       "JSON"
     ],
     "rules": {
+      "import/no-dynamic-require": "off",
       "import/no-unresolved": "off",
       "no-unused-vars": "off",
       "space-before-function-paren": "off",

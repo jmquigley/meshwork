@@ -36,16 +36,16 @@ $ npm install --save-dev meshwork
 
 ## Configuration and Usage
 
-The application can be configured a three ways:
+The application can be configured three ways:
 
 - A configuration file named `meshwork.json`.
-- A Command line parameters to a cli named `meshwork`.
+- A Command line parameter to a CLI named `meshwork`.
 - An inline JSON object passed to `meshwork()`.
 
-The inline JSON has the highest precedence over the configuration file.  This allows the program to override the settings programatically.
+The inline JSON object has the highest precedence over the configuration file.  This allows the program to override the settings programatically.
 
 ### Configuration File
-The application will look for a configuration at the root of the project named `meshwork.json`.  This file contains the base package.json file and a list of modules that will be merged with the base.
+The application will look for a configuration at the root of the project named `meshwork.json`.  This file contains the base package.json file and a list of modules that will be merged with the base:
 
     {
         "base": "package.json",
@@ -58,14 +58,14 @@ The application will look for a configuration at the root of the project named `
     }
 
 ### Command Line
-The package.json files within each module can be built directly from the commandline.  A base package and a list of modules are given:
+The package.json files within each module can be built (merged) directly from the command line.  A base package and a list of modules are given as parameters to the CLI:
 
 ```
 $ meshwork --base=package.json --modules={file1},{file2},... [--verbose]
 ```
 
 ### Inline
-The configuration can also be passed directly to the `meshwork()`.
+The configuration can also be passed directly to the `meshwork()` as a JSON object:
 
     const meshwork = require('meshwork');
     

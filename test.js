@@ -1,5 +1,6 @@
 'use strict';
 
+const proc = require('child_process');
 const fs = require('fs-extra');
 const test = require('ava');
 const packageMerge = require('package-merge');
@@ -145,16 +146,7 @@ test('Validating missing module configuration', t => {
 });
 
 
-test('Validating merge process', t => {
-    meshwork({
-        base: `${unitTestDir}/package.json`,
-        modules: [
-            `${unitTestDir}/module1/package.json`,
-            `${unitTestDir}/module2/package.json`
-        ],
-        verbose: false
-    });
-
+function validate(t) {
     let s = '{"common":"common stuff"}';
     let buf = fs.readFileSync(fbase).toString();
     t.is(buf, s);
@@ -166,6 +158,28 @@ test('Validating merge process', t => {
     s = '{"module2":"module2","common":"common stuff"}';
     buf = fs.readFileSync(fmod2).toString();
     t.is(buf, s);
+}
+
+
+test('Validating merge process', async t => {
+    meshwork({
+        base: `${unitTestDir}/package.json`,
+        modules: [
+            fmod1,
+            fmod2
+        ],
+        verbose: false
+    });
+
+    validate(t);
+});
+
+
+test('Validating command-line merge', async t => {
+    let cmd = `node cli.js --base=${fbase} --modules=${fmod1},${fmod2} --verbose`;
+    proc.execSync(cmd);
+
+    validate(t);
 });
 
 
