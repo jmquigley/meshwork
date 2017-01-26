@@ -1,65 +1,65 @@
 {
-	"name": "meshwork",
-	"version": "0.0.6",
-	"author": "jmquigley <jmquigley@outlook.com>",
-	"description": "Multi-module package.json manager",
-	"private": false,
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/jmquigley/meshwork"
-	},
-	"bugs": {
-		"url": "https://github.com/jmquigley/meshwork/issues"
-	},
-	"engines": {
-		"node": ">=7.4"
-	},
-	"dependencies": {
-		"fs-extra": "^2.0.0",
-		"object-assign": "^4.1.1",
-		"package-merge": "github:jmquigley/package-merge#lodashfix",
-		"resolve-path": "^1.3.3",
-		"yargs": "^6.5.0"
-	},
-	"devDependencies": {
-		"ava": "^0.17.0",
-		"coveralls": "^2.11.15",
-		"nyc": "^10.1.2",
-		"xo": "^0.17.1"
-	},
-	"main": "index.js",
-	"bin": {
-		"meshwork": "./cli.js"
-	},
-	"scripts": {
-		"report": "./node_modules/.bin/nyc report --reporter=html",
-		"test": "xo && nyc ava --verbose"
-	},
-	"xo": {
-		"env": {
-			"browser": true,
-			"node": true,
-			"es6": true
-		},
-		"global": [
-			"window",
-			"describe",
-			"it",
-			"JSON"
-		],
-		"rules": {
-			"space-before-function-paren": "off",
-			"unicorn/filename-case": [
-				"error",
-				{
-					"case": "snakeCase"
-				}
-			],
-			"arrow-parens": [
-				"error",
-				"as-needed"
-			]
-		}
-	}
+  "name": "meshwork",
+  "version": "0.0.7",
+  "author": "jmquigley <jmquigley@outlook.com>",
+  "description": "Multi-module package.json manager",
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmquigley/meshwork"
+  },
+  "bugs": {
+    "url": "https://github.com/jmquigley/meshwork/issues"
+  },
+  "engines": {
+    "node": ">=7.4"
+  },
+  "dependencies": {
+    "fs-extra": "^2.0.0",
+    "object-assign": "^4.1.1",
+    "package-merge": "github:jmquigley/package-merge#lodashfix",
+    "resolve-path": "^1.3.3",
+    "yargs": "^6.5.0"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "coveralls": "^2.11.15",
+    "nyc": "^10.1.2",
+    "xo": "^0.17.1"
+  },
+  "main": "index.js",
+  "bin": {
+    "meshwork": "./cli.js"
+  },
+  "scripts": {
+    "report": "./node_modules/.bin/nyc report --reporter=html",
+    "test": "xo && nyc ava --verbose"
+  },
+  "xo": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "global": [
+      "window",
+      "describe",
+      "it",
+      "JSON"
+    ],
+    "rules": {
+      "space-before-function-paren": "off",
+      "unicorn/filename-case": [
+        "error",
+        {
+          "case": "snakeCase"
+        }
+      ],
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ]
+    }
+  }
 }
