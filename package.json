@@ -1,6 +1,6 @@
 {
   "name": "meshwork",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "jmquigley <jmquigley@outlook.com>",
   "description": "Multi-module package.json manager",
   "private": false,
@@ -34,7 +34,6 @@
     "test": "xo && ava --verbose"
   },
   "xo": {
-    "space": 4,
     "env": {
       "browser": true,
       "node": true,
@@ -47,17 +46,7 @@
       "JSON"
     ],
     "rules": {
-      "import/no-dynamic-require": "off",
-      "import/no-unresolved": "off",
-      "no-unused-vars": "off",
       "space-before-function-paren": "off",
-      "no-multiple-empty-lines": [
-        "error",
-        {
-          "max": 2,
-          "maxEOF": 1
-        }
-      ],
       "unicorn/filename-case": [
         "error",
         {
