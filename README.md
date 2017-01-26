@@ -1,4 +1,4 @@
-# meshwork [![Build Status](https://travis-ci.org/jmquigley/meshwork.svg?branch=master)](https://travis-ci.org/jmquigley/meshwork) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo) [![NPM](https://img.shields.io/badge/npm-v0.0.6-blue.svg)](https://www.npmjs.com/package/meshwork) [![Coverage Status](https://coveralls.io/repos/github/jmquigley/meshwork/badge.svg?branch=master)](https://coveralls.io/github/jmquigley/meshwork?branch=master)
+# meshwork [![Build Status](https://travis-ci.org/jmquigley/meshwork.svg?branch=master)](https://travis-ci.org/jmquigley/meshwork) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo) [![NPM](https://img.shields.io/npm/v/meshwork.svg)](https://www.npmjs.com/package/meshwork) [![Coverage Status](https://coveralls.io/repos/github/jmquigley/meshwork/badge.svg?branch=master)](https://coveralls.io/github/jmquigley/meshwork?branch=master)
 
 > Multi-module package.json manager.
 
