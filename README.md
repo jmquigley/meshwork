@@ -1,4 +1,4 @@
-# meshwork [![Build Status](https://travis-ci.org/jmquigley/meshwork.svg?branch=master)](https://travis-ci.org/jmquigley/meshwork) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo) [![NPM](https://img.shields.io/badge/npm-v0.0.4-blue.svg)](https://www.npmjs.com/package/meshwork)
+# meshwork [![Build Status](https://travis-ci.org/jmquigley/meshwork.svg?branch=master)](https://travis-ci.org/jmquigley/meshwork) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo) [![NPM](https://img.shields.io/badge/npm-v0.0.5-blue.svg)](https://www.npmjs.com/package/meshwork)
 
 > Multi-module package.json manager.
 
@@ -91,10 +91,3 @@ The configuration can also be passed directly to the `meshwork()` as a JSON obje
     
         done();
     });
-
-
-[travis-ci-image]: https://travis-ci.org/jmquigley/meshwork.svg
-[travis-ci-url]: https://travis-ci.org/jmquigley/meshwork
-
-[npm-url]: https://www.npmjs.com/package/meshwork
-[npm-image]: https://img.shields.io/npm/v/yargs.svg
