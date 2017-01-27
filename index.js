@@ -19,7 +19,12 @@ function merge(base, module, opts) {
 	fs.writeFileSync(module, combined);
 }
 
-module.exports = function(opts = undefined, configFile = 'meshwork.json') {
+module.exports = function(configFile = 'meshwork.json', opts = undefined) {
+	if (typeof configFile === 'object') {
+		opts = configFile;
+		configFile = 'meshwork.json';
+	}
+
 	let configOpts = {};
 	configFile = path.resolve(configFile);
 	if (fs.existsSync(configFile)) {
