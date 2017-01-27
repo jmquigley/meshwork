@@ -1,6 +1,6 @@
 {
   "name": "meshwork",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "jmquigley <jmquigley@outlook.com>",
   "description": "Multi-module package.json manager",
   "private": false,
