@@ -16,10 +16,12 @@
     "node": ">=7.4"
   },
   "dependencies": {
+    "expand-home-dir": "0.0.3",
     "fs-extra": "^2.0.0",
     "object-assign": "^4.1.1",
     "package-merge": "github:jmquigley/package-merge#lodashfix",
-    "resolve-path": "^1.3.3",
+    "util.rstrip": "0.0.3",
+    "util.timestamp": "0.0.6",
     "yargs": "^6.5.0"
   },
   "devDependencies": {
@@ -33,8 +35,9 @@
     "meshwork": "./cli.js"
   },
   "scripts": {
-    "report": "./node_modules/.bin/nyc report --reporter=html",
-    "test": "xo && nyc ava --verbose"
+    "postinstall": "node cmd.js --postinstall",
+    "test": "node cmd.js --testing",
+    "report": "node cmd.js --reporting"
   },
   "xo": {
     "env": {

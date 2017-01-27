@@ -1,8 +1,8 @@
 'use strict';
 
+const path = require('path');
 const fs = require('fs-extra');
 const objectAssign = require('object-assign');
-const resolvePath = require('resolve-path');
 const packageMerge = require('package-merge');
 
 let prefix = 'meshwork:';
@@ -21,7 +21,7 @@ function merge(base, module, opts) {
 
 module.exports = function(opts = undefined, configFile = 'meshwork.json') {
 	let configOpts = {};
-	configFile = resolvePath(configFile);
+	configFile = path.resolve(configFile);
 	if (fs.existsSync(configFile)) {
 		configOpts = JSON.parse(fs.readFileSync(configFile));
 	}
@@ -36,7 +36,7 @@ module.exports = function(opts = undefined, configFile = 'meshwork.json') {
 		throw new Error('No modules list given in configuration');
 	}
 
-	let base = resolvePath(opts.base);
+	let base = path.resolve(opts.base);
 	if (!fs.existsSync(base)) {
 		throw new Error(`Can't find base package: ${base}`);
 	}
@@ -54,7 +54,7 @@ module.exports = function(opts = undefined, configFile = 'meshwork.json') {
 	}
 
 	opts.modules.forEach(function(pkg) {
-		let module = resolvePath(pkg);
+		let module = path.resolve(pkg);
 
 		if (!fs.existsSync(module)) {
 			throw new Error(`Can't find module package: ${module}`);

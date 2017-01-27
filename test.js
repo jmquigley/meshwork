@@ -1,12 +1,16 @@
 'use strict';
 
 const proc = require('child_process');
+const path = require('path');
 const fs = require('fs-extra');
 const test = require('ava');
 const packageMerge = require('package-merge');
+const timestamp = require('util.timestamp');
+const home = require('expand-home-dir');
 const meshwork = require('./index');
 
-let unitTestDir = 'tmp-unit-test-data';
+let unitTestDir = home(path.join('~/', '.tmp', `unit-test-data-${timestamp()}`));
+
 let f1 = `${unitTestDir}/obj1.json`;
 let f2 = `${unitTestDir}/obj2.json`;
 let fbase = `${unitTestDir}/package.json`;
