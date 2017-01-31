@@ -29,17 +29,19 @@
     "ava": "^0.17.0",
     "coveralls": "^2.11.15",
     "nyc": "^10.1.2",
+    "util.pkgwrap": "0.0.2",
     "xo": "^0.17.1"
   },
   "main": "index.js",
   "bin": {
     "meshwork": "./cli.js"
   },
-  "scripts": {
-    "postinstall": "node cmd.js --postinstall",
-    "test": "node cmd.js --testing",
-    "report": "node cmd.js --reporting"
-  },
+	"scripts": {
+		"postinstall": "pkgwrap --postinstall",
+		"test": "pkgwrap --testing",
+		"report": "pkgwrap --reporting",
+		"coverage": "pkgwrap --coverage"
+	},
   "xo": {
     "env": {
       "browser": true,
