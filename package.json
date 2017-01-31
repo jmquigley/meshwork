@@ -20,8 +20,8 @@
     "fs-extra": "^2.0.0",
     "object-assign": "^4.1.1",
     "package-merge": "github:jmquigley/package-merge#lodashfix",
-    "util.rstrip": "0.0.3",
-    "util.timestamp": "0.0.6",
+    "util.rstrip": "0.0.5",
+    "util.timestamp": "0.0.9",
     "uuid": "^3.0.1",
     "yargs": "^6.5.0"
   },
@@ -29,7 +29,7 @@
     "ava": "^0.17.0",
     "coveralls": "^2.11.15",
     "nyc": "^10.1.2",
-    "util.pkgwrap": "0.0.2",
+    "util.pkgwrap": "0.0.3",
     "xo": "^0.17.1"
   },
   "main": "index.js",
