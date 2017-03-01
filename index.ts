@@ -1,13 +1,20 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs-extra');
-const objectAssign = require('object-assign');
+import * as fs from 'fs-extra';
+import * as path from 'path';
+
 const packageMerge = require('package-merge');
 
 let prefix = 'meshwork:';
 
-function merge(base, module, opts) {
+export interface IMeshworkOpts {
+	configFile?: string;
+	base?: string;
+	modules?: string[];
+	verbose?: boolean;
+}
+
+function merge(base: string, module: string, opts: IMeshworkOpts) {
 	if (opts.verbose) {
 		console.log(`${prefix} merging ${module} with ${base}`);
 	}
@@ -19,19 +26,19 @@ function merge(base, module, opts) {
 	fs.writeFileSync(module, combined);
 }
 
-module.exports = function(configFile = 'meshwork.json', opts = undefined) {
-	if (typeof configFile === 'object') {
-		opts = configFile;
-		configFile = 'meshwork.json';
-	}
+export function meshwork(opts?: IMeshworkOpts) {
 
-	let configOpts = {};
-	configFile = path.resolve(configFile);
-	if (fs.existsSync(configFile)) {
-		configOpts = JSON.parse(fs.readFileSync(configFile));
-	}
+	let defaultOpts: IMeshworkOpts = {
+		configFile: 'meshwork.json',
+		verbose: false
+	};
 
-	opts = objectAssign({verbose: false}, configOpts, opts);
+	opts = Object.assign(defaultOpts, opts);
+
+	opts.configFile = path.resolve(opts.configFile);
+	if (fs.existsSync(opts.configFile)) {
+		opts = JSON.parse(fs.readFileSync(opts.configFile).toString());
+	}
 
 	if (!Object.prototype.hasOwnProperty.call(opts, 'base')) {
 		throw new Error('No base package given in configuration');
@@ -58,7 +65,7 @@ module.exports = function(configFile = 'meshwork.json', opts = undefined) {
 		throw new Error(`Modules list contains no entries`);
 	}
 
-	opts.modules.forEach(function(pkg) {
+	opts.modules.forEach((pkg: string) => {
 		let module = path.resolve(pkg);
 
 		if (!fs.existsSync(module)) {

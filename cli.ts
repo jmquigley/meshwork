@@ -2,6 +2,8 @@
 
 'use strict';
 
+import {meshwork} from './index';
+
 let argv = require('yargs')
 	.usage('$0 --base={package} --modules={package}[,{package}] [--verbose]')
 	.example('$0 --base=base-package.json --modules=./app/pacakge.json,./devops/packag.json', 'Adds the base file to each module')
@@ -17,8 +19,6 @@ let argv = require('yargs')
 	.describe('verbose', 'Prints information on operations as they occur')
 	.help()
 	.argv;
-
-const meshwork = require('./index');
 
 let config = {
 	base: argv.base,

@@ -1,0 +1,8 @@
+{
+	"base": "{DIR}base.json",
+	"modules": [
+		"{DIR}module1/package.json",
+		"{DIR}module2/package.json"
+	],
+	"verbose": false
+}
