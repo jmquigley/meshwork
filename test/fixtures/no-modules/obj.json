@@ -1,4 +1,4 @@
 {
-	"base": "{DIR}package.json",
+	"base": "{DIR}/package.json",
 	"verbose": false
 }

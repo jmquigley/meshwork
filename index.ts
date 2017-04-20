@@ -5,7 +5,7 @@ import * as path from 'path';
 
 const packageMerge = require('package-merge');
 
-let prefix = 'meshwork:';
+const prefix = 'meshwork:';
 
 export interface IMeshworkOpts {
 	configFile?: string;
@@ -19,16 +19,16 @@ function merge(base: string, module: string, opts: IMeshworkOpts) {
 		console.log(`${prefix} merging ${module} with ${base}`);
 	}
 
-	let dst = fs.readFileSync(module);
-	let src = fs.readFileSync(base);
-	let combined = packageMerge(dst, src);
+	const dst = fs.readFileSync(module);
+	const src = fs.readFileSync(base);
+	const combined = packageMerge(dst, src);
 
 	fs.writeFileSync(module, combined);
 }
 
 export function meshwork(opts?: IMeshworkOpts) {
 
-	let defaultOpts: IMeshworkOpts = {
+	const defaultOpts: IMeshworkOpts = {
 		configFile: 'meshwork.json',
 		verbose: false
 	};
@@ -48,7 +48,7 @@ export function meshwork(opts?: IMeshworkOpts) {
 		throw new Error('No modules list given in configuration');
 	}
 
-	let base = path.resolve(opts.base);
+	const base = path.resolve(opts.base);
 	if (!fs.existsSync(base)) {
 		throw new Error(`Can't find base package: ${base}`);
 	}
@@ -66,7 +66,7 @@ export function meshwork(opts?: IMeshworkOpts) {
 	}
 
 	opts.modules.forEach((pkg: string) => {
-		let module = path.resolve(pkg);
+		const module = path.resolve(pkg);
 
 		if (!fs.existsSync(module)) {
 			throw new Error(`Can't find module package: ${module}`);
@@ -78,4 +78,4 @@ export function meshwork(opts?: IMeshworkOpts) {
 
 		merge(base, module, opts);
 	});
-};
+}

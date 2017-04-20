@@ -4,7 +4,7 @@
 
 import {meshwork} from './index';
 
-let argv = require('yargs')
+const argv = require('yargs')
 	.usage('$0 --base={package} --modules={package}[,{package}] [--verbose]')
 	.example('$0 --base=base-package.json --modules=./app/pacakge.json,./devops/packag.json', 'Adds the base file to each module')
 	.alias('base', 'b')
@@ -20,7 +20,7 @@ let argv = require('yargs')
 	.help()
 	.argv;
 
-let config = {
+const config = {
 	base: argv.base,
 	modules: argv.modules.split(','),
 	verbose: argv.verbose

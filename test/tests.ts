@@ -1,141 +1,135 @@
 'use strict';
 
-import * as assert from 'assert';
+import test from 'ava';
 import * as proc from 'child_process';
-import * as path from 'path';
 import * as fs from 'fs-extra';
+import * as path from 'path';
 import {popd, pushd} from 'util.chdir';
 import {Fixture} from 'util.fixture';
 import {meshwork} from '../index';
-import {validateMerge} from './helpers';
+import {cleanup, validateMerge} from './helpers';
 
 const packageMerge = require('package-merge');
 
-describe('Testing meshwork', () => {
+test.after.always.cb(t => {
+	cleanup(path.basename(__filename), t);
+});
 
-	after(() => {
-		let directories = Fixture.cleanup();
-		directories.forEach((directory: string) => {
-			assert(!fs.existsSync(directory));
+test('Validating bad configuration (no base)', t => {
+	try {
+		meshwork({});
+	} catch (err) {
+		t.is(err.message, 'No base package given in configuration');
+	}
+});
+
+test('Validating missing modules in configuration', t => {
+	try {
+		meshwork({
+			base: 'aslkdjalskjgalskdj'
 		});
-	});
+	} catch (err) {
+		t.is(err.message, 'No modules list given in configuration');
+	}
+});
 
-	it('Validating bad configuration (no base)', () => {
-		try {
-			meshwork({});
-		} catch (err) {
-			assert.equal(err.message, 'No base package given in configuration');
-		}
-	});
+test('Validating missing/invalid base in configuration', t => {
+	try {
+		meshwork({
+			base: 'aslkdjalskjgalskdj',
+			modules: []
+		});
+	} catch (err) {
+		t.true(err.message.startsWith(`Can't find base package: `));
+	}
+});
 
-	it('Validating missing modules in configuration', () => {
-		try {
-			meshwork({
-				base: 'aslkdjalskjgalskdj'
-			});
-		} catch (err) {
-			assert.equal(err.message, 'No modules list given in configuration');
-		}
-	});
+test('Validating no modules in configuration (no modules)', t => {
+	const fixture = new Fixture('no-modules');
+	pushd(fixture.dir);
 
-	it('Validating missing/invalid base in configuration', () => {
-		try {
-			meshwork({
-				base: 'aslkdjalskjgalskdj',
-				modules: []
-			});
-		} catch (err) {
-			assert(err.message.startsWith(`Can't find base package: `));
-		}
-	});
+	try {
+		meshwork(fixture.obj);
+	} catch (err) {
+		t.is(err.message, 'No modules list given in configuration');
+	}
 
-	it('Validating no modules in configuration (no modules)', () => {
-		let fixture = new Fixture('no-modules');
-		pushd(fixture.dir);
+	popd();
+});
 
-		try {
-			meshwork(fixture.obj);
-		} catch (err) {
-			assert.equal(err.message, 'No modules list given in configuration');
-		}
+test('Validating empty modules in configuration', t => {
+	const fixture = new Fixture('empty-modules');
+	pushd(fixture.dir);
 
-		popd();
-	});
+	try {
+		meshwork(fixture.obj);
+	} catch (err) {
+		t.is(err.message, 'Modules list contains no entries');
+	}
 
-	it('Validating empty modules in configuration', () => {
-		let fixture = new Fixture('empty-modules');
-		pushd(fixture.dir);
+	popd();
+});
 
-		try {
-			meshwork(fixture.obj);
-		} catch (err) {
-			assert.equal(err.message, 'Modules list contains no entries');
-		}
+test('Validating modules datatype in configuration', t => {
+	const fixture = new Fixture('modules-type-mismatch');
+	pushd(fixture.dir);
 
-		popd();
-	});
+	try {
+		meshwork(fixture.obj);
+	} catch (err) {
+		t.is(err.message, 'Modules list must be of type Array');
+	}
 
-	it('Validating modules datatype in configuration', () => {
-		let fixture = new Fixture('modules-type-mismatch');
-		pushd(fixture.dir);
+	popd();
+});
 
-		try {
-			meshwork(fixture.obj);
-		} catch (err) {
-			assert.equal(err.message, 'Modules list must be of type Array');
-		}
+test('Validating missing module configuration', t => {
+	const fixture = new Fixture('modules-missing-file');
+	pushd(fixture.dir);
+	fixture.obj.configFile = path.join(fixture.dir, 'obj.json');
 
-		popd();
-	});
+	try {
+		meshwork(fixture.obj);
+	} catch (err) {
+		t.true(err.message.startsWith(`Can't find module package:`));
+	}
 
-	it('Validating missing module configuration', () => {
-		let fixture = new Fixture('modules-missing-file');
-		pushd(fixture.dir);
-		fixture.obj.configFile = path.join(fixture.dir, 'obj.json');
+	popd();
+});
 
-		try {
-			meshwork(fixture.obj);
-		} catch (err) {
-			assert(err.message.startsWith(`Can't find module package:`));
-		}
+test('Validating merge process', t => {
+	const fixture = new Fixture('simple');
+	pushd(fixture.dir);
+	fixture.obj.configFile = path.join(fixture.dir, 'meshwork.json');
 
-		popd();
-	});
+	meshwork({configFile: path.join(fixture.dir, 'meshwork.json')});
+	validateMerge(fixture, t);
 
-	it('Validating merge process', () => {
-		let fixture = new Fixture('simple');
-		pushd(fixture.dir);
-		fixture.obj.configFile = path.join(fixture.dir, 'meshwork.json');
+	popd();
+});
 
-		meshwork({configFile: path.join(fixture.dir, 'meshwork.json')});
-		validateMerge(fixture);
+test('Validating command-line merge', t => {
+	const fixture = new Fixture('simple');
+	const inp: string = fs.readFileSync(path.join(fixture.dir, 'meshwork.json')).toString();
+	const config = JSON.parse(inp);
 
-		popd();
-	});
+	const cmd = `node cli.js --base=${config.base} --modules=${config.modules[0]},${config.modules[1]} --verbose`;
 
-	it('Validating command-line merge', () => {
-		let fixture = new Fixture('simple');
-		let inp: string = fs.readFileSync(path.join(fixture.dir, 'meshwork.json')).toString();
-		let config = JSON.parse(inp);
+	proc.execSync(cmd);
+	validateMerge(fixture, t);
+});
 
-		let cmd = `node cli.js --base=${config.base} --modules=${config.modules[0]},${config.modules[1]} --verbose`;
+test('Validating package-merge', t => {
+	const o1 = {
+		item1: 'item1'
+	};
 
-		proc.execSync(cmd);
-		validateMerge(fixture);
-	});
+	const o2 = {
+		item2: 'item2'
+	};
 
-	it('Validating package-merge', () => {
-		let o1 = {
-			item1: 'item1'
-		};
+	const dst = JSON.stringify(o1);
+	const src = JSON.stringify(o2);
 
-		let o2 = {
-			item2: 'item2'
-		};
-
-		let dst = JSON.stringify(o1);
-		let src = JSON.stringify(o2);
-
-		assert.equal(packageMerge(dst, src), '{"item1":"item1","item2":"item2"}');
-	});
+	t.is(packageMerge(dst, src), '{"item1":"item1","item2":"item2"}');
 });

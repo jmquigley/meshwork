@@ -1,5 +1,5 @@
 {
-	"base": "{DIR}package.json",
+	"base": "{DIR}/package.json",
 	"modules": "",
 	"verbose": false
 }
