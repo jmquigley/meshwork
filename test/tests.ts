@@ -6,10 +6,9 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import {popd, pushd} from 'util.chdir';
 import {Fixture} from 'util.fixture';
+import merge from 'util.merge-packages';
 import {meshwork} from '../index';
 import {cleanup, validateMerge} from './helpers';
-
-const packageMerge = require('package-merge');
 
 test.after.always.cb(t => {
 	cleanup(path.basename(__filename), t);
@@ -131,5 +130,5 @@ test('Validating package-merge', t => {
 	const dst = JSON.stringify(o1);
 	const src = JSON.stringify(o2);
 
-	t.is(packageMerge(dst, src), '{"item1":"item1","item2":"item2"}');
+	t.is(merge(dst, src), '{"item1":"item1","item2":"item2"}');
 });

@@ -1,13 +1,12 @@
 import {CallbackTestContext, TestContext} from 'ava';
 import * as fs from 'fs-extra';
-import * as path from 'path';
 import {Fixture} from 'util.fixture';
 
 export function validateMerge(fixture: Fixture, t: TestContext) {
-	const f1 = fs.readFileSync(path.join(fixture.dir, 'module1', 'package.json')).toString();
+	const f1 = fixture.read('module1/package.json');
 	t.is(f1, `{\n\t"module1": "module1",\n\t"common": "common stuff"\n}\n`);
 
-	const f2 = fs.readFileSync(path.join(fixture.dir, 'module2', 'package.json')).toString();
+	const f2 = fixture.read('module2/package.json');
 	t.is(f2, `{\n\t"module2": "module2",\n\t"common": "common stuff"\n}\n`);
 }
 

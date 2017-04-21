@@ -2,8 +2,7 @@
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
-
-const packageMerge = require('package-merge');
+import merge from 'util.merge-packages';
 
 const prefix = 'meshwork:';
 
@@ -14,14 +13,14 @@ export interface IMeshworkOpts {
 	verbose?: boolean;
 }
 
-function merge(base: string, module: string, opts: IMeshworkOpts) {
+function mergeFiles(base: string, module: string, opts: IMeshworkOpts) {
 	if (opts.verbose) {
 		console.log(`${prefix} merging ${module} with ${base}`);
 	}
 
 	const dst = fs.readFileSync(module);
 	const src = fs.readFileSync(base);
-	const combined = packageMerge(dst, src);
+	const combined = merge(dst, src);
 
 	fs.writeFileSync(module, combined);
 }
@@ -76,6 +75,6 @@ export function meshwork(opts?: IMeshworkOpts) {
 			console.log(`${prefix} module=${module}`);
 		}
 
-		merge(base, module, opts);
+		mergeFiles(base, module, opts);
 	});
 }
