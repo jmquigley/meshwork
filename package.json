@@ -17,21 +17,21 @@
   },
   "dependencies": {
     "fs-extra": "^3.0.1",
-    "util.chdir": "0.0.28",
-    "util.merge-packages": "0.0.5",
-    "util.pkgwrap": "^0.0.57",
-    "yargs": "^8.0.1"
+    "util.chdir": "0.0.29",
+    "util.merge-packages": "0.0.6",
+    "util.pkgwrap": "^0.0.59",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "@types/fs-extra": "3.0.2",
-    "@types/node": "^7.0.23",
-    "@types/yargs": "^6.6.0",
-    "ava": "^0.19.1",
+    "@types/fs-extra": "3.0.3",
+    "@types/node": "^8.0.7",
+    "@types/yargs": "^8.0.0",
+    "ava": "^0.20.0",
     "coveralls": "^2.13.1",
-    "nyc": "^11.0.1",
-    "tslint": "^5.4.1",
-    "typescript": "^2.3.4",
-    "util.fixture": "0.0.54"
+    "nyc": "^11.0.3",
+    "tslint": "^5.4.3",
+    "typescript": "^2.4.1",
+    "util.fixture": "0.0.55"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
