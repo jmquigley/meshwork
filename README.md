@@ -25,19 +25,21 @@ When the application is executed, the `package.json` files within `module1`, `mo
 
 ## Installation
 
+This module uses [yarn](https://yarnpkg.com/en/) to manage dependencies and run scripts for development.
+
 To install as a global package and cli:
 ```
-$ npm install --global meshwork
+$ yarn global add meshwork
 ```
 
 To install as a development dependency with cli:
 ```
-$ npm install --save-dev meshwork
+$ yarn add --dev meshwork
 ```
 
 To build the app and run all tests:
 ```
-$ npm run all
+$ yarn run all
 ```
 
 
@@ -105,4 +107,3 @@ gulp.task('mesh', (done) => {
     done();
 });
 ```
-

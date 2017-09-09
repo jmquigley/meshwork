@@ -16,22 +16,22 @@
     "node": ">=7.5"
   },
   "dependencies": {
-    "fs-extra": "^3.0.1",
-    "util.chdir": "0.0.29",
-    "util.merge-packages": "0.0.6",
-    "util.pkgwrap": "^0.0.59",
+    "fs-extra": "^4.0.1",
+    "util.chdir": "0.0.30",
+    "util.merge-packages": "0.0.7",
+    "util.pkgwrap": "^0.0.68",
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "@types/fs-extra": "3.0.3",
-    "@types/node": "^8.0.7",
-    "@types/yargs": "^8.0.0",
-    "ava": "^0.20.0",
+    "@types/fs-extra": "4.0.2",
+    "@types/node": "^8.0.28",
+    "@types/yargs": "^8.0.2",
+    "ava": "^0.22.0",
     "coveralls": "^2.13.1",
-    "nyc": "^11.0.3",
-    "tslint": "^5.4.3",
-    "typescript": "^2.4.1",
-    "util.fixture": "0.0.55"
+    "nyc": "^11.2.1",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
+    "util.fixture": "0.0.56"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
@@ -39,7 +39,7 @@
     "meshwork": "./cli.js"
   },
   "scripts": {
-    "all": "npm install && npm run clean && npm run lint && npm run build && npm test && npm run report",
+    "all": "yarn install && yarn run clean && yarn run lint && yarn run build && yarn test && yarn run report",
     "build": "pkgwrap --build",
     "clean": "pkgwrap --clean",
     "coverage": "pkgwrap --coverage",
