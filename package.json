@@ -21,22 +21,22 @@
     "node": ">=7.x"
   },
   "dependencies": {
-    "fs-extra": "^4.0.2",
-    "util.chdir": "0.0.33",
-    "util.merge-packages": "0.0.10",
-    "yargs": "^10.0.3"
+    "fs-extra": "^5.0.0",
+    "util.chdir": "0.0.34",
+    "util.merge-packages": "0.0.11",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "4.0.5",
-    "@types/node": "^8.0.54",
-    "@types/yargs": "^8.0.2",
-    "ava": "^0.24.0",
+    "@types/fs-extra": "5.0.2",
+    "@types/node": "^9.6.6",
+    "@types/yargs": "^11.0.0",
+    "ava": "^0.25.0",
     "coveralls": "^3.0.0",
-    "nyc": "^11.3.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.2",
-    "util.fixture": "0.0.61",
-    "util.pkgwrap": "^0.0.88"
+    "nyc": "^11.7.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3",
+    "util.fixture": "0.0.62",
+    "util.pkgwrap": "^0.0.91"
   },
   "scripts": {
     "all": "yarn install && yarn run build && yarn test && yarn run report",
