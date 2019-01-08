@@ -1,6 +1,14 @@
-# meshwork [![Build Status](https://travis-ci.org/jmquigley/meshwork.svg?branch=master)](https://travis-ci.org/jmquigley/meshwork) [![tslint code style](https://img.shields.io/badge/code_style-TSlint-5ed9c7.svg)](https://palantir.github.io/tslint/) [![Test Runner](https://img.shields.io/badge/testing-ava-blue.svg)](https://github.com/avajs/ava) [![NPM](https://img.shields.io/npm/v/meshwork.svg)](https://www.npmjs.com/package/meshwork) [![Coverage Status](https://coveralls.io/repos/github/jmquigley/meshwork/badge.svg?branch=master)](https://coveralls.io/github/jmquigley/meshwork?branch=master)
+# meshwork
 
 > Multi-module package.json manager.
+
+[![Build Status](https://travis-ci.org/jmquigley/meshwork.svg?branch=master)](https://travis-ci.org/jmquigley/meshwork)
+[![tslint code style](https://img.shields.io/badge/code_style-TSlint-5ed9c7.svg)](https://palantir.github.io/tslint/)
+[![Test Runner](https://img.shields.io/badge/testing-jest-blue.svg)](https://facebook.github.io/jest/)
+[![NPM](https://img.shields.io/npm/v/meshwork.svg)](https://www.npmjs.com/package/meshwork)
+[![Coverage Status](https://coveralls.io/repos/github/jmquigley/meshwork/badge.svg?branch=master)](https://coveralls.io/github/jmquigley/meshwork?branch=master)
+
+
 
 Manages multiple submodules that contain individual package.json files.  The project contains a base package.json and N sub package files (one for each module).  This program will then scan each of the subpackages and merge the contents of the base into the each submodule.  This is a way to put common information into the base package that all of the subpackages can *inherit*.
 

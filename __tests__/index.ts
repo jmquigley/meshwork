@@ -1,6 +1,5 @@
 'use strict';
 
-import test from 'ava';
 import * as proc from 'child_process';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -10,79 +9,79 @@ import merge from 'util.merge-packages';
 import {meshwork} from '../index';
 import {cleanup, validateMerge} from './helpers';
 
-test.after.always.cb(t => {
-	cleanup(path.basename(__filename), t);
+afterAll((done) => {
+	cleanup(path.basename(__filename), done);
 });
 
-test('Validating bad configuration (no base)', t => {
+test('Validating bad configuration (no base)', () => {
 	try {
 		meshwork({});
 	} catch (err) {
-		t.is(err.message, 'No base package given in configuration');
+		expect(err.message).toBe('No base package given in configuration');
 	}
 });
 
-test('Validating missing modules in configuration', t => {
+test('Validating missing modules in configuration', () => {
 	try {
 		meshwork({
 			base: 'aslkdjalskjgalskdj'
 		});
 	} catch (err) {
-		t.is(err.message, 'No modules list given in configuration');
+		expect(err.message).toBe('No modules list given in configuration');
 	}
 });
 
-test('Validating missing/invalid base in configuration', t => {
+test('Validating missing/invalid base in configuration', () => {
 	try {
 		meshwork({
 			base: 'aslkdjalskjgalskdj',
 			modules: []
 		});
 	} catch (err) {
-		t.true(err.message.startsWith(`Can't find base package: `));
+		expect(err.message.startsWith(`Can't find base package: `)).toBe(true);
 	}
 });
 
-test('Validating no modules in configuration (no modules)', t => {
+test('Validating no modules in configuration (no modules)', () => {
 	const fixture = new Fixture('no-modules');
 	pushd(fixture.dir);
 
 	try {
 		meshwork(fixture.obj);
 	} catch (err) {
-		t.is(err.message, 'No modules list given in configuration');
+		expect(err.message).toBe('No modules list given in configuration');
 	}
 
 	popd();
 });
 
-test('Validating empty modules in configuration', t => {
+test('Validating empty modules in configuration', () => {
 	const fixture = new Fixture('empty-modules');
 	pushd(fixture.dir);
 
 	try {
 		meshwork(fixture.obj);
 	} catch (err) {
-		t.is(err.message, 'Modules list contains no entries');
+		expect(err.message).toBe('Modules list contains no entries');
 	}
 
 	popd();
 });
 
-test('Validating modules datatype in configuration', t => {
+test('Validating modules datatype in configuration', () => {
 	const fixture = new Fixture('modules-type-mismatch');
 	pushd(fixture.dir);
 
 	try {
 		meshwork(fixture.obj);
 	} catch (err) {
-		t.is(err.message, 'Modules list must be of type Array');
+		expect(err.message).toBe('Modules list must be of type Array');
 	}
 
 	popd();
 });
 
-test('Validating missing module configuration', t => {
+test('Validating missing module configuration', () => {
 	const fixture = new Fixture('modules-missing-file');
 	pushd(fixture.dir);
 	fixture.obj.configFile = path.join(fixture.dir, 'obj.json');
@@ -90,24 +89,24 @@ test('Validating missing module configuration', t => {
 	try {
 		meshwork(fixture.obj);
 	} catch (err) {
-		t.true(err.message.startsWith(`Can't find module package:`));
+		expect(err.message.startsWith(`Can't find module package:`)).toBe(true);
 	}
 
 	popd();
 });
 
-test('Validating merge process', t => {
+test('Validating merge process', () => {
 	const fixture = new Fixture('simple');
 	pushd(fixture.dir);
 	fixture.obj.configFile = path.join(fixture.dir, 'meshwork.json');
 
 	meshwork({configFile: path.join(fixture.dir, 'meshwork.json')});
-	validateMerge(fixture, t);
+	validateMerge(fixture);
 
 	popd();
 });
 
-test('Validating command-line merge', t => {
+test('Validating command-line merge', () => {
 	const fixture = new Fixture('simple');
 	const inp: string = fs.readFileSync(path.join(fixture.dir, 'meshwork.json')).toString();
 	const config = JSON.parse(inp);
@@ -115,10 +114,10 @@ test('Validating command-line merge', t => {
 	const cmd = `node cli.js --base=${config.base} --modules=${config.modules[0]},${config.modules[1]} --verbose`;
 
 	proc.execSync(cmd);
-	validateMerge(fixture, t);
+	validateMerge(fixture);
 });
 
-test('Validating package-merge', t => {
+test('Validating package-merge', () => {
 	const o1 = {
 		item1: 'item1'
 	};
@@ -130,5 +129,5 @@ test('Validating package-merge', t => {
 	const dst = JSON.stringify(o1);
 	const src = JSON.stringify(o2);
 
-	t.is(merge(dst, src), '{"item1":"item1","item2":"item2"}');
+	expect(merge(dst, src)).toBe('{"item1":"item1","item2":"item2"}');
 });

@@ -21,31 +21,61 @@
     "node": ">=7.x"
   },
   "dependencies": {
-    "fs-extra": "^5.0.0",
-    "util.chdir": "0.0.35",
-    "util.merge-packages": "0.0.12",
-    "yargs": "^11.0.0"
+    "fs-extra": "^7.0.1",
+    "util.chdir": "0.0.37",
+    "util.merge-packages": "0.0.13",
+    "yargs": "^12.0.5"
   },
   "devDependencies": {
-    "@types/fs-extra": "5.0.2",
-    "@types/node": "^9.6.6",
-    "@types/yargs": "^11.0.0",
-    "ava": "^0.25.0",
-    "coveralls": "^3.0.0",
-    "nyc": "^11.7.1",
-    "tslint": "^5.9.1",
-    "typescript": "^2.8.3",
-    "util.fixture": "0.0.63",
-    "util.pkgwrap": "^0.0.92"
+    "@types/fs-extra": "5.0.4",
+    "@types/jest": "^23.3.12",
+    "@types/node": "^10.12.18",
+    "@types/yargs": "^12.0.5",
+    "babel-jest": "^23.6.0",
+    "coveralls": "^3.0.2",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2",
+    "util.fixture": "0.0.65",
+    "util.pkgwrap": "^0.0.94"
+  },
+  "pkgwrap": {
+    "cleanup": [
+      "index.js",
+      "index.d.ts",
+      "cli.js",
+      "cli.d.ts"
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "notify": false,
+    "preset": "ts-jest",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "__tests__/helpers"
+    ],
+    "verbose": false
   },
   "scripts": {
-    "all": "yarn install && yarn run build && yarn test && yarn run report",
+    "all": "yarn install && yarn run build && yarn test",
     "build": "yarn clean && yarn run lint && pkgwrap --build",
     "clean": "pkgwrap --clean",
-    "coverage": "pkgwrap --coverage",
+    "coverage": "pkgwrap --coverage --jest",
     "lint": "pkgwrap --lint",
     "prepublishOnly": "yarn run all",
     "report": "pkgwrap --reporting",
-    "test": "pkgwrap --testing --ava"
+    "test": "pkgwrap --testing --jest"
   }
 }
