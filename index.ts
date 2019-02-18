@@ -1,19 +1,19 @@
-'use strict';
+"use strict";
 
-import * as fs from 'fs-extra';
-import * as path from 'path';
-import merge from 'util.merge-packages';
+import * as fs from "fs-extra";
+import * as path from "path";
+import merge from "util.merge-packages";
 
-const prefix = 'meshwork:';
+const prefix = "meshwork:";
 
-export interface IMeshworkOpts {
+export interface MeshworkOpts {
 	configFile?: string;
 	base?: string;
 	modules?: string[];
 	verbose?: boolean;
 }
 
-function mergeFiles(base: string, module: string, opts: IMeshworkOpts) {
+function mergeFiles(base: string, module: string, opts: MeshworkOpts) {
 	if (opts.verbose) {
 		console.log(`${prefix} merging ${module} with ${base}`);
 	}
@@ -25,10 +25,9 @@ function mergeFiles(base: string, module: string, opts: IMeshworkOpts) {
 	fs.writeFileSync(module, combined);
 }
 
-export function meshwork(opts?: IMeshworkOpts) {
-
-	const defaultOpts: IMeshworkOpts = {
-		configFile: 'meshwork.json',
+export function meshwork(opts?: MeshworkOpts) {
+	const defaultOpts: MeshworkOpts = {
+		configFile: "meshwork.json",
 		verbose: false
 	};
 
@@ -39,12 +38,12 @@ export function meshwork(opts?: IMeshworkOpts) {
 		opts = JSON.parse(fs.readFileSync(opts.configFile).toString());
 	}
 
-	if (!Object.prototype.hasOwnProperty.call(opts, 'base')) {
-		throw new Error('No base package given in configuration');
+	if (!Object.prototype.hasOwnProperty.call(opts, "base")) {
+		throw new Error("No base package given in configuration");
 	}
 
-	if (!Object.prototype.hasOwnProperty.call(opts, 'modules')) {
-		throw new Error('No modules list given in configuration');
+	if (!Object.prototype.hasOwnProperty.call(opts, "modules")) {
+		throw new Error("No modules list given in configuration");
 	}
 
 	const base = path.resolve(opts.base);

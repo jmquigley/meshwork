@@ -1,81 +1,68 @@
 {
-  "name": "meshwork",
-  "version": "0.0.27",
-  "author": "jmquigley <jmquigley@outlook.com>",
-  "description": "Multi-module package.json manager",
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "bin": {
-    "meshwork": "./cli.js"
-  },
-  "private": false,
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jmquigley/meshwork"
-  },
-  "bugs": {
-    "url": "https://github.com/jmquigley/meshwork/issues"
-  },
-  "engines": {
-    "node": ">=7.x"
-  },
-  "dependencies": {
-    "fs-extra": "^7.0.1",
-    "util.chdir": "0.0.37",
-    "util.merge-packages": "0.0.13",
-    "yargs": "^12.0.5"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "5.0.4",
-    "@types/jest": "^23.3.12",
-    "@types/node": "^10.12.18",
-    "@types/yargs": "^12.0.5",
-    "babel-jest": "^23.6.0",
-    "coveralls": "^3.0.2",
-    "jest": "^23.6.0",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2.2",
-    "util.fixture": "0.0.65",
-    "util.pkgwrap": "^0.0.94"
-  },
-  "pkgwrap": {
-    "cleanup": [
-      "index.js",
-      "index.d.ts",
-      "cli.js",
-      "cli.d.ts"
-    ]
-  },
-  "jest": {
-    "collectCoverage": true,
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx",
-      "json"
-    ],
-    "notify": false,
-    "preset": "ts-jest",
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "__tests__/helpers"
-    ],
-    "verbose": false
-  },
-  "scripts": {
-    "all": "yarn install && yarn run build && yarn test",
-    "build": "yarn clean && yarn run lint && pkgwrap --build",
-    "clean": "pkgwrap --clean",
-    "coverage": "pkgwrap --coverage --jest",
-    "lint": "pkgwrap --lint",
-    "prepublishOnly": "yarn run all",
-    "report": "pkgwrap --reporting",
-    "test": "pkgwrap --testing --jest"
-  }
+	"name": "meshwork",
+	"version": "0.0.27",
+	"author": "jmquigley <jmquigley@outlook.com>",
+	"description": "Multi-module package.json manager",
+	"private": false,
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jmquigley/meshwork"
+	},
+	"bugs": {
+		"url": "https://github.com/jmquigley/meshwork/issues"
+	},
+	"engines": {
+		"node": ">=7.x"
+	},
+	"dependencies": {
+		"fs-extra": "^7.0.1",
+		"util.chdir": "0.0.38",
+		"util.merge-packages": "0.0.14",
+		"yargs": "^13.2.1"
+	},
+	"main": "./index.min.js",
+	"types": "./index.d.ts",
+	"bin": {
+		"meshwork": "./cli.js"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.3.3",
+		"@babel/preset-env": "^7.3.1",
+		"@babel/preset-typescript": "^7.3.3",
+		"@babel/runtime": "^7.3.1",
+		"@types/fs-extra": "5.0.5",
+		"@types/jest": "^24.0.6",
+		"@types/node": "^11.9.4",
+		"@types/yargs": "^12.0.9",
+		"babel-minify": "^0.5.0",
+		"babel-jest": "^24.1.0",
+		"coveralls": "^3.0.2",
+		"jest": "^24.1.0",
+		"prettier": "^1.16.4",
+		"tslint": "^5.12.1",
+		"tslint-config-prettier": "^1.18.0",
+		"typescript": "^3.3.3",
+		"util.fixture": "0.0.66",
+		"util.pkgwrap": "^0.0.98"
+	},
+	"pkgwrap": {
+		"cleanup": [
+			"cli.js",
+			"cli.js.map",
+			"cli.d.ts"
+		]
+	},
+	"scripts": {
+		"all": "yarn install && yarn build && yarn test && yarn minify",
+		"build": "yarn clean && yarn prettier && yarn lint && pkgwrap --build",
+		"clean": "pkgwrap --clean",
+		"clean:dist": "yarn clean && rimraf node_modules/ yarn.lock",
+		"coverage": "pkgwrap --coverage --jest",
+		"lint": "pkgwrap --lint",
+		"minify": "minify ./index.js --out-file ./index.min.js",
+		"prepublishOnly": "yarn run all",
+		"prettier": "prettier --write \"**/*.{ts,tsx,js,json,yaml,yml,css}\"",
+		"test": "jest"
+	}
 }
