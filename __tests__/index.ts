@@ -4,13 +4,24 @@ import * as proc from "child_process";
 import * as fs from "fs-extra";
 import * as path from "path";
 import {popd, pushd} from "util.chdir";
-import {Fixture} from "util.fixture";
+import {cleanup, Fixture} from "util.fixture";
 import merge from "util.merge-packages";
 import {meshwork} from "../index";
-import {cleanup, validateMerge} from "./helpers";
+
+export function validateMerge(fixture: Fixture) {
+	const f1 = fixture.read("module1/package.json");
+	expect(f1).toBe(
+		`{\n\t"module1": "module1",\n\t"common": "common stuff"\n}\n`
+	);
+
+	const f2 = fixture.read("module2/package.json");
+	expect(f2).toBe(
+		`{\n\t"module2": "module2",\n\t"common": "common stuff"\n}\n`
+	);
+}
 
 afterAll((done) => {
-	cleanup(path.basename(__filename), done);
+	cleanup({done, message: path.basename(__filename)});
 });
 
 test("Validating bad configuration (no base)", () => {

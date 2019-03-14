@@ -1,6 +1,6 @@
 {
 	"name": "meshwork",
-	"version": "0.0.30",
+	"version": "0.0.31",
 	"author": "jmquigley <jmquigley@outlook.com>",
 	"description": "Multi-module package.json manager",
 	"private": false,
@@ -17,8 +17,8 @@
 	},
 	"dependencies": {
 		"fs-extra": "^7.0.1",
-		"util.chdir": "0.0.40",
-		"util.merge-packages": "0.0.16",
+		"util.chdir": "0.0.41",
+		"util.merge-packages": "0.0.17",
 		"yargs": "^13.2.2"
 	},
 	"bin": {
@@ -41,20 +41,20 @@
 		"@babel/preset-typescript": "^7.3.3",
 		"@babel/runtime": "^7.3.4",
 		"@types/fs-extra": "5.0.5",
-		"@types/jest": "^24.0.9",
-		"@types/node": "^11.10.5",
+		"@types/jest": "^24.0.11",
+		"@types/node": "^11.11.3",
 		"@types/yargs": "^12.0.9",
-		"babel-jest": "^24.3.1",
+		"babel-jest": "^24.5.0",
 		"babel-minify": "^0.5.0",
 		"babel-preset-minify": "^0.5.0",
 		"coveralls": "^3.0.3",
-		"jest": "^24.3.1",
+		"jest": "^24.5.0",
 		"prettier": "^1.16.4",
-		"tslint": "^5.13.1",
+		"tslint": "^5.14.0",
 		"tslint-config-prettier": "^1.18.0",
 		"typescript": "^3.3.3333",
-		"util.fixture": "0.0.69",
-		"util.pkgwrap": "^0.0.104"
+		"util.fixture": "0.0.72",
+		"util.pkgwrap": "^0.0.105"
 	},
 	"pkgwrap": {
 		"cleanup": [
@@ -64,7 +64,7 @@
 		]
 	},
 	"scripts": {
-		"all": "yarn install && yarn build && yarn test",
+		"all": "yarn install && yarn build && yarn test && yarn manifest",
 		"build": "yarn clean && yarn lint && yarn prettier && yarn build:es && yarn build:umd && yarn build:cli",
 		"build:es": "tsc -p . && minify index.js --out-file index.es.min.js",
 		"build:umd": "babel index.js --out-file index.umd.min.js",
@@ -73,7 +73,7 @@
 		"clean:dist": "yarn clean && rimraf node_modules/ yarn.lock",
 		"coverage": "pkgwrap --coverage --jest",
 		"lint": "pkgwrap --lint",
-		"prepublishOnly": "yarn run all",
+		"manifest": "npm pack --dry-run",
 		"prettier": "prettier --write \"**/*.{ts,tsx,js,json,yaml,yml,css}\"",
 		"test": "jest"
 	}
