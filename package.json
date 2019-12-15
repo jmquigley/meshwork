@@ -1,6 +1,6 @@
 {
 	"name": "meshwork",
-	"version": "0.0.31",
+	"version": "0.0.32",
 	"author": "jmquigley <jmquigley@outlook.com>",
 	"description": "Multi-module package.json manager",
 	"private": false,
@@ -15,11 +15,12 @@
 	"engines": {
 		"node": ">=7.x"
 	},
+	"prettier": "@jmquigley/prettier-config",
 	"dependencies": {
-		"fs-extra": "^7.0.1",
-		"util.chdir": "0.0.41",
-		"util.merge-packages": "0.0.17",
-		"yargs": "^13.2.2"
+		"fs-extra": "^8.1.0",
+		"util.chdir": "0.0.43",
+		"util.merge-packages": "0.0.18",
+		"yargs": "^15.0.2"
 	},
 	"bin": {
 		"meshwork": "./cli.js"
@@ -34,27 +35,27 @@
 		"index.d.ts"
 	],
 	"devDependencies": {
-		"@babel/cli": "^7.2.3",
-		"@babel/core": "^7.3.4",
-		"@babel/plugin-transform-modules-umd": "^7.2.0",
-		"@babel/preset-env": "^7.3.4",
-		"@babel/preset-typescript": "^7.3.3",
-		"@babel/runtime": "^7.3.4",
-		"@types/fs-extra": "5.0.5",
-		"@types/jest": "^24.0.11",
-		"@types/node": "^11.11.3",
-		"@types/yargs": "^12.0.9",
-		"babel-jest": "^24.5.0",
-		"babel-minify": "^0.5.0",
-		"babel-preset-minify": "^0.5.0",
-		"coveralls": "^3.0.3",
-		"jest": "^24.5.0",
-		"prettier": "^1.16.4",
-		"tslint": "^5.14.0",
+		"@babel/cli": "^7.7.5",
+		"@babel/core": "^7.7.5",
+		"@babel/plugin-transform-modules-umd": "^7.7.4",
+		"@babel/preset-env": "^7.7.6",
+		"@babel/preset-typescript": "^7.7.4",
+		"@babel/runtime": "^7.7.6",
+		"@jmquigley/prettier-config": "^1.0.0",
+		"@types/fs-extra": "8.0.1",
+		"@types/jest": "^24.0.23",
+		"@types/node": "^12.12.17",
+		"@types/yargs": "^13.0.3",
+		"babel-jest": "^24.9.0",
+		"babel-minify": "^0.5.1",
+		"babel-preset-minify": "^0.5.1",
+		"coveralls": "^3.0.9",
+		"jest": "^24.9.0",
+		"tslint": "^5.20.1",
 		"tslint-config-prettier": "^1.18.0",
-		"typescript": "^3.3.3333",
-		"util.fixture": "0.0.72",
-		"util.pkgwrap": "^0.0.105"
+		"typescript": "^3.7.3",
+		"util.fixture": "0.0.73",
+		"util.pkgwrap": "^0.0.115"
 	},
 	"pkgwrap": {
 		"cleanup": [
@@ -74,7 +75,7 @@
 		"coverage": "pkgwrap --coverage --jest",
 		"lint": "pkgwrap --lint",
 		"manifest": "npm pack --dry-run",
-		"prettier": "prettier --write \"**/*.{ts,tsx,js,json,yaml,yml,css}\"",
+		"prettier": "pkgwrap --prettier",
 		"test": "jest"
 	}
 }

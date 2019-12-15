@@ -1,5 +1,3 @@
-"use strict";
-
 import * as proc from "child_process";
 import * as fs from "fs-extra";
 import * as path from "path";
@@ -124,9 +122,7 @@ test("Validating command-line merge", () => {
 		.toString();
 	const config = JSON.parse(inp);
 
-	const cmd = `node cli.js --base=${config.base} --modules=${
-		config.modules[0]
-	},${config.modules[1]} --verbose`;
+	const cmd = `node cli.js --base=${config.base} --modules=${config.modules[0]},${config.modules[1]} --verbose`;
 
 	proc.execSync(cmd);
 	validateMerge(fixture);

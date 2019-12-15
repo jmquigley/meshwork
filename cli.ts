@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-"use strict";
-
 import {meshwork} from "./index";
 
 const argv = require("yargs")

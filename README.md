@@ -2,12 +2,11 @@
 
 > Multi-module package.json manager.
 
-[![build](https://circleci.com/gh/jmquigley/meshwork/tree/master.svg?style=shield)](https://circleci.com/gh/jmquigley/meshwork/tree/master)
+[![build](https://github.com/jmquigley/meshwork/workflows/build/badge.svg)](https://github.com/jmquigley/meshwork/actions)
 [![analysis](https://img.shields.io/badge/analysis-tslint-9cf.svg)](https://palantir.github.io/tslint/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![testing](https://img.shields.io/badge/testing-jest-blue.svg)](https://facebook.github.io/jest/)
 [![NPM](https://img.shields.io/npm/v/meshwork.svg)](https://www.npmjs.com/package/meshwork)
-[![coverage](https://coveralls.io/repos/github/jmquigley/meshwork/badge.svg?branch=master)](https://coveralls.io/github/jmquigley/meshwork?branch=master)
 
 
 Manages multiple submodules that contain individual package.json files.  The project contains a base package.json and N sub package files (one for each module).  This program will then scan each of the subpackages and merge the contents of the base into the each submodule.  This is a way to put common information into the base package that all of the subpackages can *inherit*.
